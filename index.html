@@ -338,7 +338,7 @@
             <div class="hdr-icon">📍</div>
             <h1>OlahData Alamat</h1>
         </div>
-        <p>Tool profesional untuk mengolah data alamat e-warranty. Parsing otomatis alamat Indonesia ke <b>Kecamatan</b>, <b>Kabupaten/Kota</b> &amp; <b>Provinsi</b>.</p>
+        <p>Tool profesional untuk mengolah data alamat e-warranty. Parsing otomatis alamat Indonesia ke <b>Pulau</b>, <b>Provinsi</b>, <b>Kabupaten/Kota</b> &amp; <b>Kecamatan</b> untuk undian dan analisis wilayah.</p>
         <div class="hdr-badge loading" id="dbBadge">⏳ Memuat database wilayah...</div>
     </header>
 
@@ -411,7 +411,7 @@
         </div>
         <div class="card">
             <div class="sec-title">📋 Hasil Data — Klik sel hijau untuk edit manual</div>
-            <div class="sec-desc">Kolom baru (<span style="color:var(--success);font-weight:700">Provinsi, Kabupaten/Kota, Kecamatan, Kelurahan/Desa</span>) telah ditambahkan di akhir tabel.</div>
+            <div class="sec-desc">Kolom baru (<span style="color:var(--success);font-weight:700">Pulau, Provinsi, Kabupaten/Kota, Kecamatan, Kelurahan/Desa, Kode Pos</span>) telah ditambahkan di akhir tabel.</div>
             <div class="filters">
                 <input type="text" id="srcInp" placeholder="🔍 Cari data..." oninput="doFilter()">
                 <button class="fbtn on" onclick="setFlt('all',this)">Semua</button>
@@ -442,43 +442,43 @@
 
 const PROVS = [
     {id:'11',n:'Aceh',a:['nad','nanggroe aceh darussalam','d.i. aceh','daerah istimewa aceh','aceh']},
-    {id:'12',n:'Sumatera Utara',a:['sumut','sumatera utara','sumatara utara','sumatra utara']},
-    {id:'13',n:'Sumatera Barat',a:['sumbar','sumatera barat','sumatara barat','sumatra barat']},
+    {id:'12',n:'Sumatera Utara',a:['sumut','sumatera utara','sumatara utara','sumatra utara','nias']},
+    {id:'13',n:'Sumatera Barat',a:['sumbar','sumatera barat','sumatara barat','sumatra barat','minangkabau']},
     {id:'14',n:'Riau',a:['riau']},
     {id:'15',n:'Jambi',a:['jambi']},
     {id:'16',n:'Sumatera Selatan',a:['sumsel','sumatera selatan','sumatara selatan','sumatra selatan']},
     {id:'17',n:'Bengkulu',a:['bengkulu']},
     {id:'18',n:'Lampung',a:['lampung']},
-    {id:'19',n:'Kepulauan Bangka Belitung',a:['babel','bangka belitung','kep. bangka belitung','kepulauan bangka belitung','kep bangka belitung']},
-    {id:'21',n:'Kepulauan Riau',a:['kepri','kep. riau','kep riau','kepulauan riau']},
+    {id:'19',n:'Kepulauan Bangka Belitung',a:['babel','bangka belitung','kep. bangka belitung','kepulauan bangka belitung','kep bangka belitung','bangka','belitung']},
+    {id:'21',n:'Kepulauan Riau',a:['kepri','kep. riau','kep riau','kepulauan riau','batam','bintan','natuna','anambas']},
     {id:'31',n:'DKI Jakarta',a:['dki','jakarta','dki jakarta','d.k.i. jakarta','d.k.i jakarta','daerah khusus ibukota jakarta']},
     {id:'32',n:'Jawa Barat',a:['jabar','jawa barat','jwa barat']},
     {id:'33',n:'Jawa Tengah',a:['jateng','jawa tengah','jwa tengah']},
     {id:'34',n:'DI Yogyakarta',a:['diy','d.i. yogyakarta','d.i.yogyakarta','yogyakarta','jogjakarta','jogja','yogya','di yogyakarta','daerah istimewa yogyakarta']},
-    {id:'35',n:'Jawa Timur',a:['jatim','jawa timur','jwa timur']},
+    {id:'35',n:'Jawa Timur',a:['jatim','jawa timur','jwa timur','madura']},
     {id:'36',n:'Banten',a:['banten']},
-    {id:'51',n:'Bali',a:['bali']},
-    {id:'52',n:'Nusa Tenggara Barat',a:['ntb','nusa tenggara barat']},
-    {id:'53',n:'Nusa Tenggara Timur',a:['ntt','nusa tenggara timur']},
+    {id:'51',n:'Bali',a:['bali','dewata']},
+    {id:'52',n:'Nusa Tenggara Barat',a:['ntb','nusa tenggara barat','lombok','sumbawa']},
+    {id:'53',n:'Nusa Tenggara Timur',a:['ntt','nusa tenggara timur','flores','sumba','timor']},
     {id:'61',n:'Kalimantan Barat',a:['kalbar','kalimantan barat']},
     {id:'62',n:'Kalimantan Tengah',a:['kalteng','kalimantan tengah']},
     {id:'63',n:'Kalimantan Selatan',a:['kalsel','kalimantan selatan']},
     {id:'64',n:'Kalimantan Timur',a:['kaltim','kalimantan timur']},
     {id:'65',n:'Kalimantan Utara',a:['kaltara','kalimantan utara']},
-    {id:'71',n:'Sulawesi Utara',a:['sulut','sulawesi utara']},
+    {id:'71',n:'Sulawesi Utara',a:['sulut','sulawesi utara','minahasa']},
     {id:'72',n:'Sulawesi Tengah',a:['sulteng','sulawesi tengah']},
-    {id:'73',n:'Sulawesi Selatan',a:['sulsel','sulawesi selatan']},
-    {id:'74',n:'Sulawesi Tenggara',a:['sultra','sulawesi tenggara']},
+    {id:'73',n:'Sulawesi Selatan',a:['sulsel','sulawesi selatan','toraja']},
+    {id:'74',n:'Sulawesi Tenggara',a:['sultra','sulawesi tenggara','buton']},
     {id:'75',n:'Gorontalo',a:['gorontalo']},
     {id:'76',n:'Sulawesi Barat',a:['sulbar','sulawesi barat']},
-    {id:'81',n:'Maluku',a:['maluku']},
-    {id:'82',n:'Maluku Utara',a:['malut','maluku utara']},
-    {id:'91',n:'Papua',a:['papua']},
-    {id:'92',n:'Papua Barat',a:['pabar','papua barat']},
-    {id:'93',n:'Papua Selatan',a:['papsel','papua selatan']},
-    {id:'94',n:'Papua Tengah',a:['papteng','papua tengah']},
-    {id:'95',n:'Papua Pegunungan',a:['papua pegunungan']},
-    {id:'96',n:'Papua Barat Daya',a:['pbd','papua barat daya']}
+    {id:'81',n:'Maluku',a:['maluku','ambon','seram','aru']},
+    {id:'82',n:'Maluku Utara',a:['malut','maluku utara','ternate','tidore','halmahera','morotai']},
+    {id:'91',n:'Papua',a:['papua','irian','irian jaya','biak']},
+    {id:'92',n:'Papua Barat',a:['pabar','papua barat','manokwari']},
+    {id:'93',n:'Papua Selatan',a:['papsel','papua selatan','merauke','asmat']},
+    {id:'94',n:'Papua Tengah',a:['papteng','papua tengah','nabire','mimika','timika']},
+    {id:'95',n:'Papua Pegunungan',a:['papua pegunungan','jayawijaya','wamena']},
+    {id:'96',n:'Papua Barat Daya',a:['pbd','papua barat daya','raja ampat']}
 ];
 
 // All 514 Kabupaten/Kota — {n: full name, p: province name}
@@ -561,14 +561,77 @@ const REGS = [
     {n:'Kabupaten Maybrat',p:'Papua Barat Daya'},{n:'Kabupaten Raja Ampat',p:'Papua Barat Daya'},{n:'Kabupaten Sorong',p:'Papua Barat Daya'},{n:'Kabupaten Sorong Selatan',p:'Papua Barat Daya'},{n:'Kabupaten Tambrauw',p:'Papua Barat Daya'},{n:'Kota Sorong',p:'Papua Barat Daya'}
 ];
 
+const PROV2PULAU = {
+    'Aceh': 'Sumatera',
+    'Sumatera Utara': 'Sumatera',
+    'Sumatera Barat': 'Sumatera',
+    'Riau': 'Sumatera',
+    'Jambi': 'Sumatera',
+    'Sumatera Selatan': 'Sumatera',
+    'Bengkulu': 'Sumatera',
+    'Lampung': 'Sumatera',
+    'Kepulauan Bangka Belitung': 'Sumatera',
+    'Kepulauan Riau': 'Sumatera',
+    'DKI Jakarta': 'Jawa',
+    'Jawa Barat': 'Jawa',
+    'Jawa Tengah': 'Jawa',
+    'DI Yogyakarta': 'Jawa',
+    'Jawa Timur': 'Jawa',
+    'Banten': 'Jawa',
+    'Bali': 'Bali',
+    'Nusa Tenggara Barat': 'Nusa Tenggara',
+    'Nusa Tenggara Timur': 'Nusa Tenggara',
+    'Kalimantan Barat': 'Kalimantan',
+    'Kalimantan Tengah': 'Kalimantan',
+    'Kalimantan Selatan': 'Kalimantan',
+    'Kalimantan Timur': 'Kalimantan',
+    'Kalimantan Utara': 'Kalimantan',
+    'Sulawesi Utara': 'Sulawesi',
+    'Sulawesi Tengah': 'Sulawesi',
+    'Sulawesi Selatan': 'Sulawesi',
+    'Sulawesi Tenggara': 'Sulawesi',
+    'Gorontalo': 'Sulawesi',
+    'Sulawesi Barat': 'Sulawesi',
+    'Maluku': 'Maluku',
+    'Maluku Utara': 'Maluku',
+    'Papua': 'Papua',
+    'Papua Barat': 'Papua',
+    'Papua Selatan': 'Papua',
+    'Papua Tengah': 'Papua',
+    'Papua Pegunungan': 'Papua',
+    'Papua Barat Daya': 'Papua'
+};
+
 const CITY_ALIAS = {
     'jaksel':'Jakarta Selatan','jakbar':'Jakarta Barat','jaktim':'Jakarta Timur',
     'jakpus':'Jakarta Pusat','jakut':'Jakarta Utara','tangsel':'Tangerang Selatan',
     'bdg':'Bandung','sby':'Surabaya','smg':'Semarang','bks':'Bekasi',
     'bgr':'Bogor','dpk':'Depok','solo':'Surakarta','jogja':'Yogyakarta',
     'yogya':'Yogyakarta','ujung pandang':'Makassar','ujungpandang':'Makassar',
-    'toba samosir':'Toba','palangkaraya':'Palangka Raya'
+    'toba samosir':'Toba','palangkaraya':'Palangka Raya',
+    'mdn':'Medan','pbr':'Pekanbaru','plg':'Palembang','ptk':'Pontianak',
+    'bjm':'Banjarmasin','bjb':'Banjarbaru','mks':'Makassar','mdo':'Manado',
+    'dps':'Denpasar','mtr':'Mataram','kpg':'Kupang','amb':'Ambon','jpr':'Jayapura',
+    'cikarang':'Kabupaten Bekasi','cibubur':'Jakarta Timur','bsd':'Tangerang Selatan',
+    'serpong':'Tangerang Selatan','bintaro':'Tangerang Selatan','karawaci':'Tangerang',
+    'alam sutera':'Tangerang Selatan','alamsutera':'Tangerang Selatan',
+    'pik':'Jakarta Utara','pantai indah kapuk':'Jakarta Utara',
+    'kelapa gading':'Jakarta Utara','sentul':'Bogor','margonda':'Depok',
+    'cinere':'Depok','kuta':'Badung','ubud':'Gianyar','sanur':'Denpasar',
+    'canggu':'Badung','seminyak':'Badung','nusa dua':'Badung',
+    'labuan bajo':'Manggarai Barat','labuanbajo':'Manggarai Barat'
 };
+
+const ISLAND_KEYWORDS = [
+    { name: 'Jawa', patterns: [/\b(p\.?\s*|pulau\s+)?jawa\b/i, /\bjava\b/i] },
+    { name: 'Sumatera', patterns: [/\b(p\.?\s*|pulau\s+)?sumat(?:e)?ra\b/i] },
+    { name: 'Kalimantan', patterns: [/\b(p\.?\s*|pulau\s+)?kalimantan\b/i, /\bborneo\b/i] },
+    { name: 'Sulawesi', patterns: [/\b(p\.?\s*|pulau\s+)?sulawesi\b/i, /\bcelebes\b/i] },
+    { name: 'Bali', patterns: [/\b(p\.?\s*|pulau\s+)?bali\b/i, /\bpulau\s+dewata\b/i] },
+    { name: 'Nusa Tenggara', patterns: [/\bnusa\s+tenggara\b/i, /\bnusra\b/i, /\blombok\b/i, /\bflores\b/i, /\bsumbawa\b/i, /\bsumba\b/i, /\btimor\b/i] },
+    { name: 'Maluku', patterns: [/\b(kep\.?\s*|kepulauan\s+|pulau\s+)?maluku\b/i, /\bmoluccas\b/i] },
+    { name: 'Papua', patterns: [/\b(p\.?\s*|pulau\s+)?papua\b/i, /\birian(\s+jaya)?\b/i] }
+];
 
 const POSTAL2PROV = {
     '10':'DKI Jakarta','11':'DKI Jakarta','12':'DKI Jakarta','13':'DKI Jakarta',
@@ -611,12 +674,19 @@ let regIdx = []; // {full, short, shortLow, prov}
 let apiDistricts = []; // loaded from API: {name, regencyName}
 
 function buildIdx() {
+    regIdx = [];
     REGS.forEach(r => {
         const short = r.n.replace(/^(Kabupaten Administrasi|Kota Administrasi|Kabupaten|Kota)\s+/i, '');
-        regIdx.push({ full: r.n, short, shortLow: short.toLowerCase(), prov: r.p });
+        const isKota = /^(Kota Administrasi|Kota)\b/i.test(r.n);
+        regIdx.push({ full: r.n, short, shortLow: short.toLowerCase(), prov: r.p, isKota });
     });
-    // Sort by short name length DESC to match longer names first
-    regIdx.sort((a, b) => b.shortLow.length - a.shortLow.length);
+    // Sort by short name length DESC, then Kota before Kabupaten for ties
+    regIdx.sort((a, b) => {
+        if (b.shortLow.length !== a.shortLow.length) {
+            return b.shortLow.length - a.shortLow.length;
+        }
+        return (b.isKota ? 1 : 0) - (a.isKota ? 1 : 0);
+    });
 }
 
 // Load kecamatan data from offline database
@@ -698,7 +768,21 @@ function findProv(text) {
 function findReg(text, provFilter) {
     const lo = text.toLowerCase();
     const pool = provFilter ? regIdx.filter(r => r.prov === provFilter) : regIdx;
-    // Already sorted by length DESC
+    const hasKabExplicit = /\b(kab\.?|kabupaten)\b/i.test(lo);
+    const hasKotaExplicit = /\b(kota|kotamadya)\b/i.test(lo);
+
+    // If explicitly specified Kab/Kota, look for that type first
+    if (hasKabExplicit || hasKotaExplicit) {
+        for (const r of pool) {
+            const idx = lo.indexOf(r.shortLow);
+            if (idx !== -1 && wordBound(lo, idx, r.shortLow.length)) {
+                if (hasKabExplicit && !r.isKota) return r;
+                if (hasKotaExplicit && r.isKota) return r;
+            }
+        }
+    }
+
+    // Default match (Kota sorted before Kabupaten for ties)
     for (const r of pool) {
         const idx = lo.indexOf(r.shortLow);
         if (idx !== -1 && wordBound(lo, idx, r.shortLow.length)) {
@@ -765,7 +849,7 @@ function extractLabels(text) {
 }
 
 function parseAddr(raw, extra) {
-    const R = { prov: '', kab: '', kec: '', kel: '', pos: '', conf: 'none', methods: [] };
+    const R = { pulau: '', prov: '', kab: '', kec: '', kel: '', pos: '', conf: 'none', methods: [] };
     if (!raw && !extra.city && !extra.prov && !extra.extra) return R;
 
     // ── Assemble all text ──
@@ -859,10 +943,7 @@ function parseAddr(raw, extra) {
         }
     }
 
-    // ── Phase 6: Segment analysis — CONSERVATIVE ──
-    // RULE: Only assign Kecamatan from explicit "Kec." label or API match.
-    //       Desa/Kelurahan go to R.kel — NEVER to R.kec.
-    //       Bare unverified segments are NEVER assumed as Kecamatan.
+    // ── Phase 6: Segment analysis ──
     {
         const segs = combined.split(/[,;]+/).map(s => s.trim()).filter(s => s.length > 2);
         const provLo = R.prov ? R.prov.toLowerCase() : '';
@@ -877,7 +958,7 @@ function parseAddr(raw, extra) {
             if (/^(rt|rw|jl|jln|jalan|gg|gang|komp|perum|blok|no\.|dsn|dusun)\b/i.test(sLo)) continue;
             if (/\d/.test(sLo) && sLo.length < 25) continue;
 
-            // ── Detect Desa/Kelurahan → store in R.kel, NOT R.kec ──
+            // Detect Desa/Kelurahan
             if (/^(kel\.?|kelurahan|ds\.?|desa|gampong|nagari|kampung)\b/i.test(sLo)) {
                 if (!R.kel) {
                     let clean = seg.replace(/^(kel\.?|kelurahan|ds\.?|desa|gampong|nagari|kampung)\s*/i, '').trim();
@@ -886,10 +967,10 @@ function parseAddr(raw, extra) {
                         R.methods.push('segment-kel');
                     }
                 }
-                continue; // DO NOT fall through to kecamatan
+                continue;
             }
 
-            // ── Detect Kecamatan ONLY from explicit label ──
+            // Detect Kecamatan
             if (/^(kec\.?|kecamatan|distrik|kapanewon|kemantren)\b/i.test(sLo)) {
                 if (!R.kec) {
                     let clean = seg.replace(/^(kec\.?|kecamatan|distrik|kapanewon|kemantren)\s*/i, '').trim();
@@ -901,11 +982,13 @@ function parseAddr(raw, extra) {
                 continue;
             }
 
-            // ── Bare segment: ONLY use as kecamatan if verified against API ──
+            // Bare segment verified against API/DB
             if (!R.kec && apiDistricts.length && sLo.length >= 3 && sLo.length <= 40 && /^[a-z]/i.test(sLo)) {
                 const match = apiDistricts.find(d => {
                     const dLo = d.name.toLowerCase();
-                    return sLo === dLo || sLo.includes(dLo) || dLo.includes(sLo);
+                    if (sLo === dLo) return true;
+                    const idx = sLo.indexOf(dLo);
+                    return idx !== -1 && wordBound(sLo, idx, dLo.length);
                 });
                 if (match) {
                     R.kec = titleCase(match.name);
@@ -923,18 +1006,37 @@ function parseAddr(raw, extra) {
         }
     }
 
-    // ── Phase 7: Validate hierarchy ──
+    // ── Phase 7: Validate hierarchy & Resolve Pulau ──
     if (R.kab && R.prov) {
         const regEntry = REGS.find(r => r.n === R.kab);
         if (regEntry && regEntry.p !== R.prov) {
-            // Trust the regency-province relationship from the database
             R.prov = regEntry.p;
             R.methods.push('hierarchy-fix');
         }
     }
 
+    // Resolve Pulau from Province
+    if (R.prov && PROV2PULAU[R.prov]) {
+        R.pulau = PROV2PULAU[R.prov];
+        R.methods.push('prov→pulau');
+    }
+
+    // If Pulau still empty, check direct island keywords in address
+    if (!R.pulau) {
+        for (const ik of ISLAND_KEYWORDS) {
+            if (ik.patterns.some(p => p.test(resolved) || p.test(combined))) {
+                R.pulau = ik.name;
+                R.methods.push('keyword-pulau');
+                if (!R.prov && ik.name === 'Bali') {
+                    R.prov = 'Bali';
+                }
+                break;
+            }
+        }
+    }
+
     // ── Phase 8: Confidence ──
-    const filled = [R.prov, R.kab, R.kec].filter(Boolean).length;
+    const filled = [R.pulau, R.prov, R.kab, R.kec].filter(Boolean).length;
     R.conf = filled >= 3 ? 'high' : filled >= 2 ? 'medium' : filled >= 1 ? 'low' : 'none';
 
     return R;
@@ -1036,7 +1138,7 @@ async function runProcess() {
         processed.push({
             orig: [...row],
             parsed: p,
-            edit: { prov: p.prov, kab: p.kab, kec: p.kec, kel: p.kel, pos: p.pos }
+            edit: { pulau: p.pulau, prov: p.prov, kab: p.kab, kec: p.kec, kel: p.kel, pos: p.pos }
         });
 
         if (i % 20 === 0 || i === total - 1) {
@@ -1062,6 +1164,7 @@ function showStats() {
     const md = processed.filter(d => d.parsed.conf === 'medium').length;
     const lo = processed.filter(d => d.parsed.conf === 'low').length;
     const no = processed.filter(d => d.parsed.conf === 'none').length;
+    const wpu = processed.filter(d => d.edit.pulau).length;
     const wp = processed.filter(d => d.edit.prov).length;
     const wk = processed.filter(d => d.edit.kab).length;
     const wc = processed.filter(d => d.edit.kec).length;
@@ -1070,10 +1173,10 @@ function showStats() {
         <div class="stat"><div class="stat-val c-ok">${hi}</div><div class="stat-lbl">✅ Lengkap (3/3)</div></div>
         <div class="stat"><div class="stat-val c-warn">${md}</div><div class="stat-lbl">⚠️ Sebagian (2/3)</div></div>
         <div class="stat"><div class="stat-val c-err">${lo + no}</div><div class="stat-lbl">❌ Kurang (≤1)</div></div>
+        <div class="stat"><div class="stat-val c-info" style="color:#a78bfa">${wpu}</div><div class="stat-lbl">🏝️ Pulau Terisi</div></div>
         <div class="stat"><div class="stat-val c-info">${wp}</div><div class="stat-lbl">Provinsi Terisi</div></div>
         <div class="stat"><div class="stat-val c-info">${wk}</div><div class="stat-lbl">Kab/Kota Terisi</div></div>
-        <div class="stat"><div class="stat-val c-info">${wc}</div><div class="stat-lbl">Kecamatan Terisi</div></div>
-        <div class="stat"><div class="stat-val c-accent">${t ? Math.round(wp/t*100) : 0}%</div><div class="stat-lbl">Akurasi Provinsi</div></div>
+        <div class="stat"><div class="stat-val c-accent">${t ? Math.round(wpu/t*100) : 0}%</div><div class="stat-lbl">Akurasi Pulau</div></div>
     `;
 }
 
@@ -1084,7 +1187,7 @@ function getFiltered() {
         if (curFilter === 'part' && d.parsed.conf !== 'medium') return false;
         if (curFilter === 'fail' && d.parsed.conf !== 'low' && d.parsed.conf !== 'none') return false;
         if (q) {
-            const all = [...d.orig, d.edit.prov, d.edit.kab, d.edit.kec, d.edit.kel, d.edit.pos].join(' ').toLowerCase();
+            const all = [...d.orig, d.edit.pulau, d.edit.prov, d.edit.kab, d.edit.kec, d.edit.kel, d.edit.pos].join(' ').toLowerCase();
             return all.includes(q);
         }
         return true;
@@ -1107,7 +1210,7 @@ function renderRes() {
 
     let h = '<table><thead><tr><th class="rn">#</th>';
     headers.forEach(hh => h += `<th>${esc(hh)}</th>`);
-    h += '<th class="col-new">PROVINSI</th><th class="col-new">KAB/KOTA</th><th class="col-new">KECAMATAN</th><th class="col-new">KEL/DESA</th><th class="col-new">KODE POS</th><th>STATUS</th>';
+    h += '<th class="col-new" style="background:rgba(167,139,250,0.18)!important;color:#c4b5fd!important;">PULAU</th><th class="col-new">PROVINSI</th><th class="col-new">KAB/KOTA</th><th class="col-new">KECAMATAN</th><th class="col-new">KEL/DESA</th><th class="col-new">KODE POS</th><th>STATUS</th>';
     h += '</tr></thead><tbody>';
 
     page.forEach((d, idx) => {
@@ -1115,6 +1218,7 @@ function renderRes() {
         const bg = d.parsed.conf === 'none' ? ' style="background:rgba(248,113,113,.03)"' : '';
         h += `<tr${bg}><td class="rn">${st+idx+1}</td>`;
         d.orig.forEach(c => h += `<td title="${esc(String(c||''))}">${esc(String(c||''))}</td>`);
+        h += `<td class="col-new cell-edit" style="font-weight:700;color:#c4b5fd!important;" onclick="edt(this,${gi},'pulau')">${esc(d.edit.pulau||'—')}</td>`;
         h += `<td class="col-new cell-edit" onclick="edt(this,${gi},'prov')">${esc(d.edit.prov||'—')}</td>`;
         h += `<td class="col-new cell-edit" onclick="edt(this,${gi},'kab')">${esc(d.edit.kab||'—')}</td>`;
         h += `<td class="col-new cell-edit" onclick="edt(this,${gi},'kec')">${esc(d.edit.kec||'—')}</td>`;
@@ -1159,20 +1263,24 @@ function edt(td, ri, field) {
 
 function saveEdt(td, ri, field, val) {
     processed[ri].edit[field] = val.trim();
+    if (field === 'prov' && val.trim() && PROV2PULAU[val.trim()] && !processed[ri].edit.pulau) {
+        processed[ri].edit.pulau = PROV2PULAU[val.trim()];
+    }
     td.textContent = val.trim() || '—';
     const e = processed[ri].edit;
-    const n = [e.prov, e.kab, e.kec].filter(Boolean).length;
+    const n = [e.pulau, e.prov, e.kab, e.kec].filter(Boolean).length;
     processed[ri].parsed.conf = n >= 3 ? 'high' : n >= 2 ? 'medium' : n >= 1 ? 'low' : 'none';
     showStats();
+    if (field === 'prov') renderRes();
 }
 
 function dl(fmt) {
     if (!processed.length) { toast('Tidak ada data!', 'err'); return; }
-    const outH = [...headers, 'Provinsi', 'Kabupaten/Kota', 'Kecamatan', 'Kelurahan/Desa', 'Kode Pos'];
+    const outH = [...headers, 'Pulau', 'Provinsi', 'Kabupaten/Kota', 'Kecamatan', 'Kelurahan/Desa', 'Kode Pos'];
     const outD = processed.map(d => {
         const row = [...d.orig];
         while (row.length < headers.length) row.push('');
-        return [...row, d.edit.prov||'', d.edit.kab||'', d.edit.kec||'', d.edit.kel||'', d.edit.pos||''];
+        return [...row, d.edit.pulau||'', d.edit.prov||'', d.edit.kab||'', d.edit.kec||'', d.edit.kel||'', d.edit.pos||''];
     });
     const ws = XLSX.utils.aoa_to_sheet([outH, ...outD]);
     ws['!cols'] = outH.map((h, i) => {
